@@ -1,16 +1,23 @@
 package configDemo;
 
 import io.restassured.RestAssured;
-import io.restassured.config.RedirectConfig;
 import io.restassured.listener.ResponseValidationFailureListener;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import static config.ConfigFactory.getDefaultConfig;
 import static io.restassured.config.FailureConfig.failureConfig;
 import static io.restassured.config.RedirectConfig.redirectConfig;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ConfigDemo {
     public static final String BASE_URL = "https://api.github.com/";
+
+
+    @BeforeSuite
+    void setup(){
+        RestAssured.config=getDefaultConfig();
+    }
 
     @Test
     public void maxRedirect() {
